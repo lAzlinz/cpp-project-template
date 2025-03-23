@@ -54,4 +54,9 @@ compile_lib: $(LIB_TARGET)
 run: $(TARGET)
 	@$<
 
-.PHONY: compile_all compile_lib run
+clean:
+	@if exist "$(BIN_DIR)" rmdir /S /Q "$(BIN_DIR)"
+	@if exist "$(LIB_DIR)" for /D %%d in ("$(LIB_DIR)/*") do if exist "%%d/bin" rmdir /S /Q "%%d/bin"
+	@if exist "$(LIB_DIR)" for /D %%d in ("$(LIB_DIR)/*") do if exist "%%d/*.a" del /F /Q "%%d/*.a"
+
+.PHONY: compile_all compile_lib  clean
